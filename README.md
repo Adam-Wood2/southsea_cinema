@@ -149,7 +149,8 @@ southsea_cinema/
 │   ├── constants.dart          # Shared colours, text styles, and app title
 │   ├── main.dart               # Main app and route setup
 │   ├── views/
-│   │   └── home_view.dart      # Starter home page
+│   │   ├── home_view.dart      # Starter home page
+│   │   └── movie_listing.dart  # Empty movie listing page you build in Demo 1
 │   └── widgets/
 │       └── nav_drawer.dart     # Minimal starter drawer
 ├── test/
