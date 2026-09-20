@@ -112,6 +112,8 @@ In Chrome or Edge:
 
 This repository is the starting point for your Southsea Cinema coursework, which is **Item 1** of your module and worth **50% of the overall module mark**. Item 1 is assessed as a portfolio: you build the app in five stages and demonstrate each stage to a member of staff during your timetabled practical session.
 
+**Demo 1** is the union of the Worksheet 1 and Worksheet 2 exercises: fork and run this app, then build a movie listing page in `lib/views/movie_listing.dart` for a film of your choice, with a title and description, a ticket quantity dropdown, and a booking button. Follow the exercises in [Worksheet 1](https://manighahrmani.github.io/sandwich_shop/worksheet-1.html) and [Worksheet 2](https://manighahrmani.github.io/sandwich_shop/worksheet-2.html).
+
 There are five demos, but only your best four count towards Item 1, so you can miss (or do poorly on) one without harming your mark. Each demo is worth 25% of Item 1 (12.5% of the module) and is marked on three things:
 
 - Functionality (9% of Item 1): what your app can do by this point in the schedule
