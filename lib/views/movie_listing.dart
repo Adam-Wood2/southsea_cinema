@@ -20,6 +20,16 @@ class _MovieListingState extends State<MovieListing> {
   double _totalPrice = 0.0;
   bool _itemInCart = false;
 
+  List<DropdownMenuEntry<int>> ticketAmountEntries = [
+                    DropdownMenuEntry(value: 0, label: "0"),
+                    DropdownMenuEntry(value: 1, label: "1"),
+                    DropdownMenuEntry(value: 2, label: "2"),
+                    DropdownMenuEntry(value: 3, label: "3"),
+                    DropdownMenuEntry(value: 4, label: "4"),
+                    DropdownMenuEntry(value: 5, label: "5"),
+                  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,14 +84,7 @@ class _MovieListingState extends State<MovieListing> {
                       });
                     }
                   },
-                  dropdownMenuEntries: [
-                    DropdownMenuEntry(value: 0, label: "0"),
-                    DropdownMenuEntry(value: 1, label: "1"),
-                    DropdownMenuEntry(value: 2, label: "2"),
-                    DropdownMenuEntry(value: 3, label: "3"),
-                    DropdownMenuEntry(value: 4, label: "4"),
-                    DropdownMenuEntry(value: 5, label: "5"),
-                  ]
+                  dropdownMenuEntries: ticketAmountEntries
                 ),
                 SizedBox(width: 15,),
                 ElevatedButton(onPressed: _addToBasket, child: Text("Add to order"))
@@ -99,7 +102,11 @@ class _MovieListingState extends State<MovieListing> {
     _totalPrice = _quantity*_price;
     _cartQuantity = _quantity;
     setState(() {
+      if (_quantity == 0) {
+        _itemInCart = false;
+      } else {
       _itemInCart = true;
+      }
     });
   }
 }
