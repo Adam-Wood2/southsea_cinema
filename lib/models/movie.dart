@@ -17,5 +17,6 @@ class Movie {
     required this.time,
     required this.length,
     required this.imagePath
-  })
+  });
+  
 }
