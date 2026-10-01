@@ -95,9 +95,11 @@ class _MovieListingState extends State<MovieListing> {
                           SizedBox(
                             width: 15,
                           ),
-                          ElevatedButton(
+                          ElevatedButton.icon(
                               onPressed: _addToBasket,
-                              child: Text("Add to order"))
+                              icon: Icon(Icons.shopping_cart), 
+                              label: Text("Add to order")
+                          )
                         ],
                       );
                     } else {
@@ -117,9 +119,11 @@ class _MovieListingState extends State<MovieListing> {
                           SizedBox(
                             height: 15,
                           ),
-                          ElevatedButton(
+                          ElevatedButton.icon(
                               onPressed: _addToBasket,
-                              child: Text("Add to order"))
+                              icon: Icon(Icons.shopping_cart), 
+                              label: Text("Add to order")
+                          )
                         ],
                       );
                     }
