@@ -19,12 +19,12 @@ class _MovieListingState extends State<MovieListing> {
   bool _itemInCart = false;
 
   List<DropdownMenuEntry<int>> ticketAmountEntries = [
-    DropdownMenuEntry(value: 0, label: "0"),
-    DropdownMenuEntry(value: 1, label: "1"),
-    DropdownMenuEntry(value: 2, label: "2"),
-    DropdownMenuEntry(value: 3, label: "3"),
-    DropdownMenuEntry(value: 4, label: "4"),
-    DropdownMenuEntry(value: 5, label: "5"),
+    DropdownMenuEntry(value: 0, label: "0", style: dropdownButtonStyle),
+    DropdownMenuEntry(value: 1, label: "1", style: dropdownButtonStyle),
+    DropdownMenuEntry(value: 2, label: "2", style: dropdownButtonStyle),
+    DropdownMenuEntry(value: 3, label: "3", style: dropdownButtonStyle),
+    DropdownMenuEntry(value: 4, label: "4", style: dropdownButtonStyle),
+    DropdownMenuEntry(value: 5, label: "5", style: dropdownButtonStyle),
   ];
 
   @override
@@ -65,7 +65,9 @@ class _MovieListingState extends State<MovieListing> {
                     style: listingDescriptionStyle,
                   ),
                   Text(
-                      "A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led."),
+                      "A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led.",
+                      style: listingDescriptionStyle,
+                  ),
                   SizedBox(
                     height: 5,
                   ),
@@ -84,6 +86,8 @@ class _MovieListingState extends State<MovieListing> {
                           DropdownMenu(
                               initialSelection: 0,
                               selectOnly: true,
+                              menuStyle: const MenuStyle(backgroundColor: WidgetStatePropertyAll(cinemaSurface)),
+                              textStyle: const TextStyle(color: cinemaFontWhite),
                               onSelected: (int? value) {
                                 if (value != null) {
                                   setState(() {
@@ -108,6 +112,8 @@ class _MovieListingState extends State<MovieListing> {
                           DropdownMenu(
                               initialSelection: 0,
                               selectOnly: true,
+                              menuStyle: const MenuStyle(backgroundColor: WidgetStatePropertyAll(cinemaSurface)),
+                              textStyle: const TextStyle( color: cinemaFontWhite),
                               onSelected: (int? value) {
                                 if (value != null) {
                                   setState(() {

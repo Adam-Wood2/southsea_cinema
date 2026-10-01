@@ -27,3 +27,8 @@ const TextStyle listingDescriptionStyle = TextStyle(
   color: cinemaFontWhite,
   fontSize: 18
 );
+
+const ButtonStyle dropdownButtonStyle = ButtonStyle(
+  backgroundColor: WidgetStatePropertyAll<Color>(cinemaSurface),
+  foregroundColor: WidgetStatePropertyAll<Color>(cinemaFontWhite),
+);
