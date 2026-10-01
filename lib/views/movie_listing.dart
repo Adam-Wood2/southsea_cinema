@@ -124,7 +124,7 @@ class _MovieListingState extends State<MovieListing> {
                       );
                     }
                   }),
-                  _itemInCart ? Text("$_cartQuantity tickets added to basket (£$_totalPrice)"): Text("")
+                  _itemInCart ? Text("$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})"): Text("")
                 ]),
           ),
         )
