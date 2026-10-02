@@ -39,7 +39,7 @@ class _MovieListingState extends State<MovieListing> {
         drawer: const NavDrawer(),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: EdgeInsets.all(20.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 20,
@@ -87,8 +87,8 @@ class _MovieListingState extends State<MovieListing> {
                           DropdownMenu(
                               initialSelection: 0,
                               selectOnly: true,
-                              menuStyle: const MenuStyle(backgroundColor: WidgetStatePropertyAll(cinemaSurface)),
-                              textStyle: const TextStyle(color: cinemaFontWhite),
+                              menuStyle: dropdownMenuStyle,
+                              textStyle: dropdownTextStyle,
                               onSelected: (int? value) {
                                 if (value != null) {
                                   setState(() {
@@ -115,8 +115,8 @@ class _MovieListingState extends State<MovieListing> {
                           DropdownMenu(
                               initialSelection: 0,
                               selectOnly: true,
-                              menuStyle: const MenuStyle(backgroundColor: WidgetStatePropertyAll(cinemaSurface)),
-                              textStyle: const TextStyle( color: cinemaFontWhite),
+                              menuStyle: dropdownMenuStyle,
+                              textStyle: dropdownTextStyle,
                               onSelected: (int? value) {
                                 if (value != null) {
                                   setState(() {
