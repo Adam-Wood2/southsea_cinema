@@ -14,11 +14,11 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   int _quantity = 0;
   int _cartQuantity = 0;
-  double _price = 5.99;
+  final double _price = 5.99;
   double _totalPrice = 0.0;
   bool _itemInCart = false;
 
-  List<DropdownMenuEntry<int>> ticketAmountEntries = [
+  final List<DropdownMenuEntry<int>> ticketAmountEntries = [
     DropdownMenuEntry(value: 0, label: "0", style: dropdownButtonStyle),
     DropdownMenuEntry(value: 1, label: "1", style: dropdownButtonStyle),
     DropdownMenuEntry(value: 2, label: "2", style: dropdownButtonStyle),
