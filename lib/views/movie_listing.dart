@@ -79,6 +79,7 @@ class _MovieListingState extends State<MovieListing> {
                     "Select Quantities (Up to 5 in total)",
                     style: listingDescriptionStyle,
                   ),
+                  Text("Adult (£5.99)"),
                   LayoutBuilder(builder: (context, constraints) {
                     if (constraints.maxWidth > 400) {
                       return Row(
@@ -109,6 +110,7 @@ class _MovieListingState extends State<MovieListing> {
                       );
                     } else {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           DropdownMenu(
                               initialSelection: 0,
@@ -144,10 +146,10 @@ class _MovieListingState extends State<MovieListing> {
   }
 
   void _addToBasket() {
-    _totalPrice = _quantity * _price;
     _cartQuantity = _quantity;
+    _totalPrice = _cartQuantity * _price;
     setState(() {
-      if (_quantity == 0) {
+      if (_cartQuantity == 0) {
         _itemInCart = false;
       } else {
         _itemInCart = true;
