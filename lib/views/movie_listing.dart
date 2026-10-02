@@ -102,7 +102,8 @@ class _MovieListingState extends State<MovieListing> {
                           ElevatedButton.icon(
                               onPressed: _addToBasket,
                               icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order")
+                              label: Text("Add to order"),
+                              style: cinemaButtonStyle,
                           )
                         ],
                       );
@@ -128,7 +129,8 @@ class _MovieListingState extends State<MovieListing> {
                           ElevatedButton.icon(
                               onPressed: _addToBasket,
                               icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order")
+                              label: Text("Add to order"),
+                              style: cinemaButtonStyle,
                           )
                         ],
                       );

@@ -32,3 +32,8 @@ const ButtonStyle dropdownButtonStyle = ButtonStyle(
   backgroundColor: WidgetStatePropertyAll<Color>(cinemaSurface),
   foregroundColor: WidgetStatePropertyAll<Color>(cinemaFontWhite),
 );
+
+const ButtonStyle cinemaButtonStyle = ButtonStyle(
+  backgroundColor: WidgetStatePropertyAll<Color>(cinemaSurface),
+  foregroundColor: WidgetStatePropertyAll<Color>(cinemaFontWhite),
+);
