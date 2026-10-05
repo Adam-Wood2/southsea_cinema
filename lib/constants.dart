@@ -10,6 +10,7 @@ const Color cinemaBackground = Color(0xFF1B1E28);
 const Color cinemaFontWhite = Color(0xFFFFFFFF);
 const Color cinemaFontMuted = Color(0xFF8A90A0);
 const Color cinemaSurface = Color(0xFF242936);
+const Color cinemaButton = Color(0xFF54bede);
 
 const TextStyle cinemaHeaderStyle = TextStyle(
   color: cinemaFontWhite,
@@ -42,6 +43,6 @@ const TextStyle dropdownTextStyle = TextStyle(
 );
 
 const ButtonStyle cinemaButtonStyle = ButtonStyle(
-  backgroundColor: WidgetStatePropertyAll<Color>(cinemaSurface),
+  backgroundColor: WidgetStatePropertyAll<Color>(cinemaButton),
   foregroundColor: WidgetStatePropertyAll<Color>(cinemaFontWhite),
 );

@@ -18,19 +18,49 @@ class MovieCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(movie.name, style: listingTitleStyle,),
-                Text("(${movie.releaseYear})"),
-                Text("(${movie.rating})")
+                Expanded(child: Text(movie.name, style: listingTitleStyle,)),
+                Text("  (${movie.releaseYear}) "),
+                Text(" (${movie.rating}) "),
+                
               ],
             ),
-            Image.asset(
-              movie.imagePath,
-              width: 240,
-              height: 360,
-              fit: BoxFit.cover
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final imageWidth = (constraints.maxWidth * 0.35).clamp(100.0, 200.0);
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: imageWidth,
+                      child: AspectRatio(
+                        aspectRatio: 2 / 3,
+                        child: Image.asset(
+                          movie.imagePath,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    Expanded(child: Text(movie.description, )),
+                  ],
+                );
+              },
             ),
-            const SizedBox(width: 15,)
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${movie.date} ${movie.time}"),
+                ElevatedButton.icon(
+                              onPressed: (){},
+                              icon: Icon(Icons.shopping_cart), 
+                              label: Text("Book Now"),
+                              style: cinemaButtonStyle,
+                )
+              ],
+            )
           ],
         ),
         )
