@@ -27,7 +27,7 @@ class MovieRepository {
         price: 7.99, 
         date: "Friday 23 Oct", 
         time: "20:00 - 21:15", 
-        imagePath: "assets/images/dracula_post.jpg"
+        imagePath: "assets/images/dracula_poster.jpg"
       )
     ];
   }
