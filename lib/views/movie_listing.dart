@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/models/movie.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  final Movie movie;
+  const MovieListing({super.key, required this.movie});
 
   @override
-  State<StatefulWidget> createState() {
+  State<MovieListing> createState() {
     return _MovieListingState();
   }
 }
@@ -14,7 +16,7 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   int _quantity = 0;
   int _cartQuantity = 0;
-  final double _price = 5.99;
+  double get _price => widget.movie.price;
   double _totalPrice = 0.0;
   bool _itemInCart = false;
 
@@ -31,7 +33,7 @@ class _MovieListingState extends State<MovieListing> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(appTitle, style: cinemaHeaderStyle),
+          title: Text("Book ${widget.movie.name}", style: cinemaHeaderStyle),
           backgroundColor: cinemaSurface,
           iconTheme: const IconThemeData(color: cinemaBrand),
           elevation: 0,
