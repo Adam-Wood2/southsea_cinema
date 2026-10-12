@@ -47,7 +47,7 @@ class _MovieListingState extends State<MovieListing> {
                 spacing: 20,
                 children: [
                   Text(
-                    "Everything Everywhere All At Once (2022) (15)",
+                    "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.rating})",
                     style: listingTitleStyle,
                   ),
                   SizedBox(
@@ -57,7 +57,7 @@ class _MovieListingState extends State<MovieListing> {
                     "Southsea Cinema Room",
                     style: listingDescriptionStyle,
                   ),
-                  Text("Thursday 22 Oct 2026, 18:00 - Ends at 20:19",
+                  Text("${widget.movie.date} -- ${widget.movie.time}",
                       style: listingDescriptionStyle),
                   SizedBox(
                     height: 5,
@@ -67,7 +67,7 @@ class _MovieListingState extends State<MovieListing> {
                     style: listingDescriptionStyle,
                   ),
                   Text(
-                      "A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led.",
+                    widget.movie.description,
                       style: listingDescriptionStyle,
                   ),
                   SizedBox(
@@ -81,7 +81,7 @@ class _MovieListingState extends State<MovieListing> {
                     "Select Quantities (Up to 5 in total)",
                     style: listingDescriptionStyle,
                   ),
-                  Text("Adult (£5.99)"),
+                  Text("Price per ticket: £${widget.movie.price}"),
                   LayoutBuilder(builder: (context, constraints) {
                     if (constraints.maxWidth > 400) {
                       return Row(
