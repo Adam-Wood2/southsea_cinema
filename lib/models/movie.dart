@@ -2,23 +2,42 @@ class Movie {
   final String id;
   final String name;
   final int releaseYear;
-  final String rating;
+  final String ageRating;
   final String description;
   final double price;
   final String date;
   final String time;
   final String imagePath;
 
+  static const childRatings = ["U", "PG"];
+  static const adultRatings = ["18"];
+
   const Movie({
     required this.id,
     required this.name,
     required this.releaseYear,
-    required this.rating,
+    required this.ageRating,
     required this.description,
     required this.price,
     required this.date,
     required this.time,
     required this.imagePath
   });
+
+  String get formattedPrice => "£${price.toStringAsFixed(2)}";
+
+  bool get isChildFriendly {
+    if (childRatings.contains(ageRating)) {
+      return true;
+    }
+    return false;
+  }
+
+  bool get isAdultOnly {
+    if (adultRatings.contains(ageRating)) {
+      return true;
+    }
+    return false;
+  }
   
 }

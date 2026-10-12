@@ -47,7 +47,7 @@ class _MovieListingState extends State<MovieListing> {
                 spacing: 20,
                 children: [
                   Text(
-                    "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.rating})",
+                    "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.ageRating})",
                     style: listingTitleStyle,
                   ),
                   SizedBox(
@@ -82,7 +82,7 @@ class _MovieListingState extends State<MovieListing> {
                     "Select Quantities (Up to 5 in total)",
                     style: listingDescriptionStyle,
                   ),
-                  Text("Price per ticket: £${widget.movie.price}"),
+                  Text("Price per ticket: ${widget.movie.formattedPrice}"),
                   LayoutBuilder(builder: (context, constraints) {
                     if (constraints.maxWidth > 400) {
                       return Row(

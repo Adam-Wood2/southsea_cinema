@@ -23,7 +23,7 @@ class MovieCard extends StatelessWidget {
               children: [
                 Expanded(child: Text(movie.name, style: listingTitleStyle,)),
                 Text("  (${movie.releaseYear}) "),
-                Text(" (${movie.rating}) "),
+                Text(" (${movie.ageRating}) "),
                 
               ],
             ),
