@@ -69,7 +69,7 @@ class _MovieListingState extends State<MovieListing> {
                   ),
                   Text(
                     widget.movie.description,
-                      style: listingDescriptionStyle,
+                    style: listingDescriptionStyle,
                   ),
                   SizedBox(
                     height: 5,
@@ -104,10 +104,10 @@ class _MovieListingState extends State<MovieListing> {
                             width: 15,
                           ),
                           ElevatedButton.icon(
-                              onPressed: _addToBasket,
-                              icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order"),
-                              style: cinemaButtonStyle,
+                            onPressed: _addToBasket,
+                            icon: Icon(Icons.shopping_cart),
+                            label: Text("Add to order"),
+                            style: cinemaButtonStyle,
                           )
                         ],
                       );
@@ -132,20 +132,22 @@ class _MovieListingState extends State<MovieListing> {
                             height: 15,
                           ),
                           ElevatedButton.icon(
-                              onPressed: _addToBasket,
-                              icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order"),
-                              style: cinemaButtonStyle,
+                            onPressed: _addToBasket,
+                            icon: Icon(Icons.shopping_cart),
+                            label: Text("Add to order"),
+                            style: cinemaButtonStyle,
                           )
                         ],
                       );
                     }
                   }),
-                  _itemInCart ? Text("$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})"): Text("")
+                  _itemInCart
+                      ? Text(
+                          "$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})")
+                      : Text("")
                 ]),
           ),
-        )
-      );
+        ));
   }
 
   void _addToBasket() {

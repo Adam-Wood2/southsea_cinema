@@ -19,28 +19,20 @@ const TextStyle cinemaHeaderStyle = TextStyle(
 );
 
 const TextStyle listingTitleStyle = TextStyle(
-  color: cinemaFontWhite,
-  fontSize: 30,
-  fontWeight: FontWeight.bold
-);
+    color: cinemaFontWhite, fontSize: 30, fontWeight: FontWeight.bold);
 
-const TextStyle listingDescriptionStyle = TextStyle(
-  color: cinemaFontWhite,
-  fontSize: 18
-);
+const TextStyle listingDescriptionStyle =
+    TextStyle(color: cinemaFontWhite, fontSize: 18);
 
 const ButtonStyle dropdownButtonStyle = ButtonStyle(
   backgroundColor: WidgetStatePropertyAll<Color>(cinemaSurface),
   foregroundColor: WidgetStatePropertyAll<Color>(cinemaFontWhite),
 );
 
-const MenuStyle dropdownMenuStyle = MenuStyle(
-  backgroundColor: WidgetStatePropertyAll(cinemaSurface)
-);
+const MenuStyle dropdownMenuStyle =
+    MenuStyle(backgroundColor: WidgetStatePropertyAll(cinemaSurface));
 
-const TextStyle dropdownTextStyle = TextStyle(
-  color: cinemaFontWhite
-);
+const TextStyle dropdownTextStyle = TextStyle(color: cinemaFontWhite);
 
 const ButtonStyle cinemaButtonStyle = ButtonStyle(
   backgroundColor: WidgetStatePropertyAll<Color>(cinemaButton),

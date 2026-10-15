@@ -7,17 +7,18 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 
 void main() {
-  group("App smoke tests", (){
+  group("App smoke tests", () {
     testWidgets("App displays HomeView as home", (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
       expect(find.byType(HomeView), findsOneWidget);
       expect(find.text("Southsea Cinema & Arts Centre"), findsOneWidget);
     });
 
-    testWidgets("Displays movie cards with name, prices, dates and ratings", (WidgetTester tester) async {
+    testWidgets("Displays movie cards with name, prices, dates and ratings",
+        (WidgetTester tester) async {
       await tester.pumpWidget(SouthseaCinemaApp());
       await tester.pumpAndSettle();
-      
+
       expect(find.text("Everything Everywhere All At Once"), findsOneWidget);
       expect(find.text("£5.99"), findsOneWidget);
       expect(find.text("(2022) "), findsOneWidget);

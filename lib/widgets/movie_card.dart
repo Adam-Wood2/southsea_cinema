@@ -11,73 +11,78 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: cinemaSurface,
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Text(movie.name, style: listingTitleStyle,)),
-                Text("(${movie.releaseYear}) "),
-                Text("(${movie.ageRating}) "),
-                
-              ],
-            ),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final imageWidth = (constraints.maxWidth * 0.35).clamp(100.0, 200.0);
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: imageWidth,
-                      child: AspectRatio(
-                        aspectRatio: 2 / 3,
-                        child: Image.asset(
-                          movie.imagePath,
-                          fit: BoxFit.cover,
+        color: cinemaSurface,
+        margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                      child: Text(
+                    movie.name,
+                    style: listingTitleStyle,
+                  )),
+                  Text("(${movie.releaseYear}) "),
+                  Text("(${movie.ageRating}) "),
+                ],
+              ),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final imageWidth =
+                      (constraints.maxWidth * 0.35).clamp(100.0, 200.0);
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: imageWidth,
+                        child: AspectRatio(
+                          aspectRatio: 2 / 3,
+                          child: Image.asset(
+                            movie.imagePath,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 15),
-                    Expanded(child: Text(movie.description, )),
-                  ],
-                );
-              },
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("${movie.date} ${movie.time}"),
-                ElevatedButton.icon(
-                              onPressed: (){
-                                Navigator.push(context, 
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return MovieListing(movie: movie);
-                                  }
-                                ));
-                              },
-                              icon: Icon(Icons.shopping_cart), 
-                              label: Text("Book Now"),
-                              style: cinemaButtonStyle,
-                )
-              ],
-            ),
-            SizedBox(width: double.infinity,child: Padding(
-              padding: const EdgeInsets.only(right: 20, top: 10),
-              child: Text(movie.formattedPrice, textAlign: TextAlign.right),
-            ))
-          ],
-        ),
-        )
-      
-      
-    );
+                      const SizedBox(width: 15),
+                      Expanded(
+                          child: Text(
+                        movie.description,
+                      )),
+                    ],
+                  );
+                },
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${movie.date} ${movie.time}"),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MovieListing(movie: movie);
+                      }));
+                    },
+                    icon: Icon(Icons.shopping_cart),
+                    label: Text("Book Now"),
+                    style: cinemaButtonStyle,
+                  )
+                ],
+              ),
+              SizedBox(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20, top: 10),
+                    child:
+                        Text(movie.formattedPrice, textAlign: TextAlign.right),
+                  ))
+            ],
+          ),
+        ));
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/views/home_view.dart';
 
-
 void main() {
   runApp(const SouthseaCinemaApp());
 }
