@@ -15,20 +15,20 @@ void main() {
       final MovieRepository repository = MovieRepository();
       final List<Movie> movies = repository.getMovies();
 
-      final Movie EEAAO = movies[0];
-      expect(EEAAO.id, "everything-everywhere");
-      expect(EEAAO.name, "Everything Everywhere All At Once");
-      expect(EEAAO.releaseYear, 2022);
-      expect(EEAAO.ageRating, "PG15");
+      final Movie eeaao = movies[0];
+      expect(eeaao.id, "everything-everywhere");
+      expect(eeaao.name, "Everything Everywhere All At Once");
+      expect(eeaao.releaseYear, 2022);
+      expect(eeaao.ageRating, "PG15");
       expect(
-          EEAAO.description,
+          eeaao.description,
           "A middle-aged Chinese immigrant is swept up into an insane adventure"
           " in which she alone can save existence by exploring other universes and connecting"
           " with the lives she could have led.");
-      expect(EEAAO.price, 5.99);
-      expect(EEAAO.date, "Thursday 22 Oct");
-      expect(EEAAO.time, "18:00 - 20:19");
-      expect(EEAAO.imagePath, isNotEmpty);
+      expect(eeaao.price, 5.99);
+      expect(eeaao.date, "Thursday 22 Oct");
+      expect(eeaao.time, "18:00 - 20:19");
+      expect(eeaao.imagePath, isNotEmpty);
 
       final Movie dracula = movies[1];
       expect(dracula.id, "dracula");
