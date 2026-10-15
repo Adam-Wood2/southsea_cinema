@@ -68,7 +68,11 @@ class MovieCard extends StatelessWidget {
                               style: cinemaButtonStyle,
                 )
               ],
-            )
+            ),
+            SizedBox(width: double.infinity,child: Padding(
+              padding: const EdgeInsets.only(right: 20, top: 10),
+              child: Text(movie.formattedPrice, textAlign: TextAlign.right),
+            ))
           ],
         ),
         )
