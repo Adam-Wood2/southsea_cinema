@@ -26,18 +26,5 @@ class Movie {
 
   String get formattedPrice => "£${price.toStringAsFixed(2)}";
 
-  bool get isChildFriendly {
-    if (childRatings.contains(ageRating)) {
-      return true;
-    }
-    return false;
-  }
-
-  bool get isAdultOnly {
-    if (adultRatings.contains(ageRating)) {
-      return true;
-    }
-    return false;
-  }
   
 }

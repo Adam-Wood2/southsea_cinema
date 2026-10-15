@@ -2,7 +2,7 @@ import 'package:southsea_cinema/models/movie.dart';
 
 class MovieRepository {
   List<Movie> getMovies() {
-    return const [
+    return [
       Movie(
         id: "everything-everywhere", 
         name: "Everything Everywhere All At Once",
@@ -30,5 +30,14 @@ class MovieRepository {
         imagePath: "assets/images/dracula_poster.jpg"
       )
     ];
+  }
+
+  Movie? getMovieById(String id) {
+    for (final movie in getMovies()) {
+      if (movie.id == id) {
+        return movie;
+      }
+    }
+    return null;
   }
 }

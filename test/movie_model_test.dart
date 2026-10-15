@@ -27,92 +27,57 @@ void main() {
       }
     );
 
-    group("Movie model getter tests", () {
-      test("formattedPrice returns price with pound sign and two decimals", (){
-      const movie = Movie(
-        id: "dracula", 
-        name: "Dracula", 
-        releaseYear: 1931, 
-        ageRating: "PG", 
-        description: "Dracula Movie Description", 
-        price: 7.5, 
-        date: "Thursday 21st Feb", 
-        time: "10:00 - 12:00", 
-        imagePath: "assets/images/Dracula.jpg"
+    group("Movie model formattedPrice tests", () {
+      test("formattedPrice returns price 7.50 with pound sign and two decimals", (){
+        const movie = Movie(
+          id: "dracula", 
+          name: "Dracula", 
+          releaseYear: 1931, 
+          ageRating: "PG", 
+          description: "Dracula Movie Description", 
+          price: 7.5, 
+          date: "Thursday 21st Feb", 
+          time: "10:00 - 12:00", 
+          imagePath: "assets/images/Dracula.jpg"
+        );
+
+        expect(movie.formattedPrice, "£7.50");
+        }
       );
 
-      expect(movie.formattedPrice, "£7.50");
+      test("formattedPrice returns price below 1 with pound sign and two decimals", () {
+        const movie = Movie(
+          id: "dracula", 
+          name: "Dracula", 
+          releaseYear: 1931, 
+          ageRating: "PG", 
+          description: "Dracula Movie Description", 
+          price: 0.75, 
+          date: "Thursday 21st Feb", 
+          time: "10:00 - 12:00", 
+          imagePath: "assets/images/Dracula.jpg"
+        );
+
+        expect(movie.formattedPrice, "£0.75");
+      });
+
+      test("formattedPrice returns price with no pence with pound sign and two decimals", () {
+        const movie = Movie(
+          id: "dracula", 
+          name: "Dracula", 
+          releaseYear: 1931, 
+          ageRating: "PG", 
+          description: "Dracula Movie Description", 
+          price: 7, 
+          date: "Thursday 21st Feb", 
+          time: "10:00 - 12:00", 
+          imagePath: "assets/images/Dracula.jpg"
+        );
+
+        expect(movie.formattedPrice, "£7.00");
+      });
     }
-    );
-
-    test("isChildFriendly returns true for PG film", () {
-      const movie = Movie(
-        id: "dracula", 
-        name: "Dracula", 
-        releaseYear: 1931, 
-        ageRating: "PG", 
-        description: "Dracula Movie Description", 
-        price: 7.5, 
-        date: "Thursday 21st Feb", 
-        time: "10:00 - 12:00", 
-        imagePath: "assets/images/Dracula.jpg"
-      );
-
-      expect(movie.isChildFriendly, true);
-    }
-    );
-
-    test("isChildFriendly returns true for U film", () {
-      const movie = Movie(
-        id: "dracula", 
-        name: "Dracula", 
-        releaseYear: 1931, 
-        ageRating: "U", 
-        description: "Dracula Movie Description", 
-        price: 7.5, 
-        date: "Thursday 21st Feb", 
-        time: "10:00 - 12:00", 
-        imagePath: "assets/images/Dracula.jpg"
-      );
-
-      expect(movie.isChildFriendly, true);
-    }
-    );
-
-    test("isChildFriendly returns false for 18 film", () {
-      const movie = Movie(
-        id: "dracula", 
-        name: "Dracula", 
-        releaseYear: 1931, 
-        ageRating: "18", 
-        description: "Dracula Movie Description", 
-        price: 7.5, 
-        date: "Thursday 21st Feb", 
-        time: "10:00 - 12:00", 
-        imagePath: "assets/images/Dracula.jpg"
-      );
-
-      expect(movie.isChildFriendly, false);
-    }
-    );
-
-
-    test("isAdultOnly returns true for 18 film", (){
-      const movie = Movie(
-        id: "dracula", 
-        name: "Dracula", 
-        releaseYear: 1931, 
-        ageRating: "18", 
-        description: "Dracula Movie Description", 
-        price: 7.5, 
-        date: "Thursday 21st Feb", 
-        time: "10:00 - 12:00", 
-        imagePath: "assets/images/Dracula.jpg"
-      );
-      expect(movie.isAdultOnly, true);
-    });
-    }
-    );
+  );
   }
   );
 }
