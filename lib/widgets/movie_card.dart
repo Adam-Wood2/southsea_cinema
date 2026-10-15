@@ -22,8 +22,8 @@ class MovieCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(child: Text(movie.name, style: listingTitleStyle,)),
-                Text("  (${movie.releaseYear}) "),
-                Text(" (${movie.ageRating}) "),
+                Text("(${movie.releaseYear}) "),
+                Text("(${movie.ageRating}) "),
                 
               ],
             ),
