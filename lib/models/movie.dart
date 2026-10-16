@@ -9,8 +9,6 @@ class Movie {
   final String time;
   final String imagePath;
 
-  static const List<String> childRatings = ["U", "PG"];
-  static const List<String> adultRatings = ["18"];
 
   const Movie(
       {required this.id,
