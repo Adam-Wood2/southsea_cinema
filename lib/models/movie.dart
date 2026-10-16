@@ -9,7 +9,6 @@ class Movie {
   final String time;
   final String imagePath;
 
-
   const Movie(
       {required this.id,
       required this.name,
