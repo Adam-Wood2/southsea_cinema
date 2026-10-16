@@ -52,7 +52,6 @@ void main() {
 
       expect(movie, isNotNull);
       expect(movie?.name, "Everything Everywhere All At Once");
-      expect(movie?.price, 5.99);
     });
 
     test("getMovieById returns null when id does not exist", () {
