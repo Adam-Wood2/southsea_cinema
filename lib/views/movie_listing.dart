@@ -47,7 +47,7 @@ class _MovieListingState extends State<MovieListing> {
                 spacing: 20,
                 children: [
                   Text(
-                    "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.rating})",
+                    "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.ageRating})",
                     style: listingTitleStyle,
                   ),
                   SizedBox(
@@ -69,7 +69,7 @@ class _MovieListingState extends State<MovieListing> {
                   ),
                   Text(
                     widget.movie.description,
-                      style: listingDescriptionStyle,
+                    style: listingDescriptionStyle,
                   ),
                   SizedBox(
                     height: 5,
@@ -82,7 +82,7 @@ class _MovieListingState extends State<MovieListing> {
                     "Select Quantities (Up to 5 in total)",
                     style: listingDescriptionStyle,
                   ),
-                  Text("Price per ticket: £${widget.movie.price}"),
+                  Text("Price per ticket: ${widget.movie.formattedPrice}"),
                   LayoutBuilder(builder: (context, constraints) {
                     if (constraints.maxWidth > 400) {
                       return Row(
@@ -104,10 +104,10 @@ class _MovieListingState extends State<MovieListing> {
                             width: 15,
                           ),
                           ElevatedButton.icon(
-                              onPressed: _addToBasket,
-                              icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order"),
-                              style: cinemaButtonStyle,
+                            onPressed: _addToBasket,
+                            icon: Icon(Icons.shopping_cart),
+                            label: Text("Add to order"),
+                            style: cinemaButtonStyle,
                           )
                         ],
                       );
@@ -132,20 +132,22 @@ class _MovieListingState extends State<MovieListing> {
                             height: 15,
                           ),
                           ElevatedButton.icon(
-                              onPressed: _addToBasket,
-                              icon: Icon(Icons.shopping_cart), 
-                              label: Text("Add to order"),
-                              style: cinemaButtonStyle,
+                            onPressed: _addToBasket,
+                            icon: Icon(Icons.shopping_cart),
+                            label: Text("Add to order"),
+                            style: cinemaButtonStyle,
                           )
                         ],
                       );
                     }
                   }),
-                  _itemInCart ? Text("$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})"): Text("")
+                  _itemInCart
+                      ? Text(
+                          "$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})")
+                      : Text("")
                 ]),
           ),
-        )
-      );
+        ));
   }
 
   void _addToBasket() {
