@@ -26,8 +26,8 @@ class MovieCard extends StatelessWidget {
                     movie.name,
                     style: listingTitleStyle,
                   )),
-                  Text("(${movie.releaseYear}) "),
-                  Text("(${movie.ageRating}) "),
+                  Text("(${movie.releaseYear}) ", style: listingInfoStyle,),
+                  Text("(${movie.ageRating}) ", style: listingInfoStyle),
                 ],
               ),
               LayoutBuilder(
@@ -50,7 +50,7 @@ class MovieCard extends StatelessWidget {
                       const SizedBox(width: 15),
                       Expanded(
                           child: Text(
-                        movie.description,
+                        movie.description, style: listingDescriptionStyle,
                       )),
                     ],
                   );
@@ -60,7 +60,7 @@ class MovieCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${movie.date} ${movie.time}"),
+                  Text("${movie.date} ${movie.time}", style: listingInfoStyle),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(context,
@@ -69,7 +69,7 @@ class MovieCard extends StatelessWidget {
                       }));
                     },
                     icon: Icon(Icons.shopping_cart),
-                    label: Text("Book Now"),
+                    label: Text("Book Now", style: listingDescriptionStyle),
                     style: cinemaButtonStyle,
                   )
                 ],
@@ -79,7 +79,7 @@ class MovieCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20, top: 10),
                     child:
-                        Text(movie.formattedPrice, textAlign: TextAlign.right),
+                        Text(movie.formattedPrice, textAlign: TextAlign.right, style: listingInfoStyle,),
                   ))
             ],
           ),
