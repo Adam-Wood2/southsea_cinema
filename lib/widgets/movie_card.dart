@@ -60,7 +60,7 @@ class MovieCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${movie.date} ${movie.time}", style: listingInfoStyle),
+                  Text("${movie.date} \n${movie.time}", style: listingInfoStyle),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(context,
