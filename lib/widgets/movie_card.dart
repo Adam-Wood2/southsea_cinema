@@ -26,7 +26,10 @@ class MovieCard extends StatelessWidget {
                     movie.name,
                     style: listingTitleStyle,
                   )),
-                  Text("(${movie.releaseYear}) ", style: listingInfoStyle,),
+                  Text(
+                    "(${movie.releaseYear}) ",
+                    style: listingInfoStyle,
+                  ),
                   Text("(${movie.ageRating}) ", style: listingInfoStyle),
                 ],
               ),
@@ -50,7 +53,8 @@ class MovieCard extends StatelessWidget {
                       const SizedBox(width: 15),
                       Expanded(
                           child: Text(
-                        movie.description, style: listingDescriptionStyle,
+                        movie.description,
+                        style: listingDescriptionStyle,
                       )),
                     ],
                   );
@@ -60,7 +64,8 @@ class MovieCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${movie.date} \n${movie.time}", style: listingInfoStyle),
+                  Text("${movie.date} \n${movie.time}",
+                      style: listingInfoStyle),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(context,
@@ -78,8 +83,11 @@ class MovieCard extends StatelessWidget {
                   width: double.infinity,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20, top: 10),
-                    child:
-                        Text(movie.formattedPrice, textAlign: TextAlign.right, style: listingInfoStyle,),
+                    child: Text(
+                      movie.formattedPrice,
+                      textAlign: TextAlign.right,
+                      style: listingInfoStyle,
+                    ),
                   ))
             ],
           ),
