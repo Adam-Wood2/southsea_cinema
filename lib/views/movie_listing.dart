@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/widgets/square_button.dart';
 
 class MovieListing extends StatefulWidget {
   final Movie movie;
@@ -100,11 +101,10 @@ class _MovieListingState extends State<MovieListing> {
                           SizedBox(
                             width: 15,
                           ),
-                          ElevatedButton.icon(
+                          SquareButton(
                             onPressed: _addToBasket,
                             icon: Icon(Icons.shopping_cart),
-                            label: Text("Add to order"),
-                            style: cinemaButtonStyle,
+                            label: "Add to order",
                           )
                         ],
                       );
@@ -128,11 +128,10 @@ class _MovieListingState extends State<MovieListing> {
                           SizedBox(
                             height: 15,
                           ),
-                          ElevatedButton.icon(
+                          SquareButton(
                             onPressed: _addToBasket,
                             icon: Icon(Icons.shopping_cart),
-                            label: Text("Add to order"),
-                            style: cinemaButtonStyle,
+                            label: "Add to order",
                           )
                         ],
                       );

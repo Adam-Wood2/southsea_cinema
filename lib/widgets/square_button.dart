@@ -13,10 +13,12 @@ class SquareButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (icon == null) {
       return ElevatedButton(
-          style: cinemaButtonStyle, onPressed: onPressed, child: Text(label));
+          style: cinemaButtonStyleSquare,
+          onPressed: onPressed,
+          child: Text(label));
     } else {
       return ElevatedButton.icon(
-          style: cinemaButtonStyle,
+          style: cinemaButtonStyleSquare,
           onPressed: onPressed,
           label: Text(label),
           icon: icon);
