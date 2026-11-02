@@ -48,7 +48,7 @@ void main() {
         expect(find.byType(MovieListing), findsOneWidget);
         expect(find.text("Book Everything Everywhere All At Once"),
             findsOneWidget);
-        expect(find.image(FileImage(File("assets/images/EEAAO_poster.jpg"))),
+        expect(find.image(AssetImage("assets/images/EEAAO_poster.jpg")),
             findsOneWidget);
         expect(find.text("Add to order"), findsOneWidget);
 
