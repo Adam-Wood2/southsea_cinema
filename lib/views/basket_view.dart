@@ -61,6 +61,7 @@ class _BasketViewState extends State<BasketView> {
                     "${itemMovie.name}, ${itemMovie.date}, ${itemMovie.time}")),
             IconButton(
                 icon: Icon(Icons.delete_outline),
+                style: cinemaButtonStyleSquare,
                 onPressed: () {
                   setState(() {
                     cart.removeItem(index);
