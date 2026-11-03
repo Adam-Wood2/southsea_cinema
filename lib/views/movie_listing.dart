@@ -3,6 +3,8 @@ import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/square_button.dart';
+import 'package:southsea_cinema/repositories/cart_repository.dart';
+import 'package:southsea_cinema/models/cart_item.dart';
 
 class MovieListing extends StatefulWidget {
   final Movie movie;
@@ -15,6 +17,7 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
+  final CartRepository cart = CartRepository.instance;
   int _quantity = 0;
   int _cartQuantity = 0;
   double get _price => widget.movie.price;
@@ -154,6 +157,8 @@ class _MovieListingState extends State<MovieListing> {
         _itemInCart = false;
       } else {
         _itemInCart = true;
+        CartItem item = CartItem(movie: widget.movie, quantity: _cartQuantity);
+        cart.addItem(item);
       }
     });
   }
