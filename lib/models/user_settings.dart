@@ -4,7 +4,7 @@ class UserSettings {
   final String patronNumber;
   final bool receiveNewsletter;
 
-  UserSettings(
+  const UserSettings(
       {this.email = "",
       this.address = "",
       this.patronNumber = "",
