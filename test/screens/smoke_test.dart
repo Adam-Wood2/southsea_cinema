@@ -35,6 +35,9 @@ void main() {
     });
 
     group("Navigation tests", () {
+      setUp(() {
+        CartRepository.instance.clear();
+      });
       testWidgets(
           "Pressing Book Now navigates to the MovieListing screen with selected movie",
           (WidgetTester tester) async {

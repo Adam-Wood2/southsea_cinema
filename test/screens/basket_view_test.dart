@@ -75,7 +75,7 @@ void main() {
       expect(find.text("£15.00"), findsOneWidget);
       expect(find.text("£35.00"), findsOneWidget);
       expect(find.text("£4.00"), findsOneWidget);
-      expect(find.text("39.00"), findsOneWidget);
+      expect(find.text("£39.00"), findsOneWidget);
     });
   });
 }
