@@ -56,9 +56,10 @@ class _BasketViewState extends State<BasketView> {
                   ],
                 )),
             Expanded(
-                flex: 6,
+                flex: 8,
                 child: Text(
-                    "${itemMovie.name}, ${itemMovie.date}, ${itemMovie.time}")),
+                    "${itemMovie.name}, ${itemMovie.date}, ${itemMovie.time}",
+                    textAlign: TextAlign.left)),
             IconButton(
                 icon: Icon(Icons.delete_outline),
                 onPressed: () {

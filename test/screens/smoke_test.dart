@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:flutter/material.dart';
+import 'package:southsea_cinema/repositories/cart_repository.dart';
 import 'package:southsea_cinema/views/home_view.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
@@ -93,6 +94,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.byType(HomeView), findsOneWidget);
+        expect(CartRepository.instance.getItems().length, 1);
 
         //Does same as above but for Dracula
         //scrolls down on home view until dracula movie card is found
@@ -115,6 +117,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text("1 tickets added to basket (£7.99)"), findsOneWidget);
+        expect(CartRepository.instance.getItems().length, 2);
       });
     });
   });
