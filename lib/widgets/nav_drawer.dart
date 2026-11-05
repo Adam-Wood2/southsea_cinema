@@ -56,8 +56,18 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       title: Text(title, style: const TextStyle(color: cinemaFontWhite)),
       onTap: () {
-        Navigator.pop(context);
-        if (route != null) {
+        ModalRoute<dynamic>? modalRoute = ModalRoute.of(context);
+        String currentRoute = "";
+
+        if (modalRoute != null) {
+          RouteSettings settings = modalRoute.settings;
+          String? routeName = settings.name;
+          if (routeName != null) {
+            currentRoute = routeName;
+          }
+        }
+
+        if (currentRoute != route) {
           Navigator.pushNamed(context, route!);
         }
       },

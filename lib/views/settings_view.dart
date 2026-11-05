@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/user_settings.dart';
+import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/square_button.dart';
 
 class SettingsView extends StatefulWidget {
@@ -58,6 +59,7 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text(appTitle)),
+        drawer: NavDrawer(),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child:
