@@ -54,7 +54,15 @@ class _MovieListingState extends State<MovieListing> {
                   SizedBox(
                     height: 5,
                   ),
-                  Image.asset(widget.movie.imagePath),
+                  Image.asset(
+                    widget.movie.imagePath,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Center(child: Text("Image Unavailable")));
+                    },
+                  ),
                   Text(
                     "Southsea Cinema Room",
                     style: listingDescriptionStyle,

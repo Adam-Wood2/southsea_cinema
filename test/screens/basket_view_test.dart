@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/cart_item.dart';
 import 'package:southsea_cinema/repositories/cart_repository.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/movie_repository.dart';
 import 'package:southsea_cinema/views/basket_view.dart';
 
 const Movie testMovie = Movie(
@@ -76,6 +77,22 @@ void main() {
       expect(find.text("£35.00"), findsOneWidget);
       expect(find.text("£4.00"), findsOneWidget);
       expect(find.text("£39.00"), findsOneWidget);
+    });
+
+    testWidgets("Items loaded from JSON are added to the basket correctly",
+        (WidgetTester tester) async {
+      MovieRepository repository = MovieRepository();
+      final List<Movie> movies = await repository.loadMoviesFromAsset();
+
+      CartItem item = CartItem(movie: movies[2], quantity: 3);
+      CartRepository.instance.addItem(item);
+
+      await tester.pumpWidget(const MaterialApp(home: BasketView()));
+
+      expect(find.text("3 tickets"), findsOneWidget);
+      expect(find.textContaining("Bullet Train"), findsOneWidget);
+      expect(find.text("£30.00").last, findsOneWidget);
+      expect(find.text("£34.00"), findsOneWidget);
     });
   });
 }

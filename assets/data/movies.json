@@ -5,7 +5,7 @@
     "releaseYear": 2022,
     "ageRating": "PG15",
     "description": "A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led.",
-    "price": 1.0,
+    "price": 5.99,
     "date": "Thursday 22 Oct",
     "time": "18:00 - 20:19",
     "imagePath": "assets/images/EEAAO_poster.jpg"
@@ -20,5 +20,27 @@
     "date": "Friday 23 Oct",
     "time": "20:00 - 21:15",
     "imagePath": "assets/images/dracula_poster.jpg"
+  },
+  {
+    "id": "bullet-train",
+    "name": "Bullet Train",
+    "releaseYear": 2022,
+    "ageRating": "15",
+    "description": "Ladybug, a professional assassin, is assigned to retrieve a briefcase from a bullet train. Soon, he finds himself battling many other killers who board the same train but with a different objective.",
+    "price": 10.0,
+    "date": "Wednesday 21 Oct",
+    "time": "20:00 - 21:15",
+    "imagePath": "assets/images/bullet_train_poster.jpg"
+  },
+  {
+    "id": "nonexistant",
+    "name": "nonexistant",
+    "releaseYear": 2000,
+    "ageRating": "15",
+    "description": "None",
+    "price": 0.0,
+    "date": "Wednesday 21 Oct",
+    "time": "20:00 - 21:15",
+    "imagePath": "assets/images/nonexistant_poster.jpg"
   }
 ]

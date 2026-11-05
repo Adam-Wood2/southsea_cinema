@@ -48,6 +48,11 @@ class MovieCard extends StatelessWidget {
                           child: Image.asset(
                             movie.imagePath,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const SizedBox.expand(
+                                  child:
+                                      Center(child: Text("Image unavailable")));
+                            },
                           ),
                         ),
                       ),
