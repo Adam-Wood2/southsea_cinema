@@ -3,6 +3,12 @@ import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/user_settings.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/square_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const String prefAddress = "user_address";
+const String prefEmail = "user_email";
+const String prefPatronNumber = "user_patron_number";
+const String prefNewsletter = "user_newsletter";
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -20,12 +26,51 @@ class _SettingsViewState extends State<SettingsView> {
   bool _receiveNewsletter = false;
   String _confirmationMessage = "";
 
+  Future<void> _loadSettings() async {
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    final String? savedAddress = await prefs.getString(prefAddress);
+    final String? savedEmail = await prefs.getString(prefEmail);
+    final String? savedPatronNumber = await prefs.getString(prefPatronNumber);
+    final bool? savedNewsletter = await prefs.getBool(prefNewsletter);
+
+    String address = "";
+    if (savedAddress != null) {
+      address = savedAddress;
+    }
+
+    String email = "";
+    if (savedEmail != null) {
+      email = savedEmail;
+    }
+
+    String patronNumber = "";
+    if (savedPatronNumber != null) {
+      patronNumber = savedPatronNumber;
+    }
+
+    bool newsletter = false;
+    if (savedNewsletter != null) {
+      newsletter = savedNewsletter;
+    }
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _addressController.text = address;
+      _emailController.text = email;
+      _patronNumberController.text = patronNumber;
+      _receiveNewsletter = newsletter;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _addressController = TextEditingController();
     _emailController = TextEditingController();
     _patronNumberController = TextEditingController();
+    _loadSettings();
   }
 
   @override
@@ -36,16 +81,26 @@ class _SettingsViewState extends State<SettingsView> {
     super.dispose();
   }
 
-  void _saveSettings() {
+  Future<void> _saveSettings() async {
     final String address = _addressController.text.trim();
     final String email = _emailController.text.trim();
     final String patronNumber = _patronNumberController.text.trim();
+
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    await prefs.setString(prefAddress, address);
+    await prefs.setString(prefEmail, email);
+    await prefs.setString(prefPatronNumber, patronNumber);
+    await prefs.setBool(prefNewsletter, _receiveNewsletter);
 
     final UserSettings settings = UserSettings(
         address: address,
         email: email,
         patronNumber: patronNumber,
         receiveNewsletter: _receiveNewsletter);
+
+    if (!mounted) {
+      return;
+    }
     setState(() {
       _confirmationMessage = "Settings saved";
     });
@@ -104,7 +159,7 @@ class _SettingsViewState extends State<SettingsView> {
                     hintText: "Enter your patron number",
                     suffixIcon: IconButton(
                         icon: Icon(Icons.clear),
-                        onPressed: () => clearText(_emailController))),
+                        onPressed: () => clearText(_patronNumberController))),
               ),
               const SizedBox(height: 12),
               Row(
