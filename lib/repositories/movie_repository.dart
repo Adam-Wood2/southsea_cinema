@@ -12,7 +12,6 @@ class MovieRepository {
       return cachedMovies;
     }
 
-
     return [
       Movie(
           id: "everything-everywhere",
