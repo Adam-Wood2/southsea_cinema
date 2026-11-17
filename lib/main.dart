@@ -1,11 +1,44 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/views/home_view.dart';
+
 import 'views/basket_view.dart';
 import 'views/settings_view.dart';
 
+bool isSupportPlatform() {
+  if (kIsWeb) {
+    return false;
+  } else if (defaultTargetPlatform == TargetPlatform.android) {
+    return true;
+  }
+  return false;
+}
+
 void main() {
-  runApp(const SouthseaCinemaApp());
+  if (isSupportPlatform()) {
+    runApp(const SouthseaCinemaApp());
+  } else {
+    runApp(const UnsupportedPlatformApp());
+  }
+}
+
+class UnsupportedPlatformApp extends StatelessWidget {
+  const UnsupportedPlatformApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(25.0),
+            child: Text(
+                "This app saves orders with SQLite and only runs on Android devices or emulators"),
+          ),
+        )));
+  }
 }
 
 class SouthseaCinemaApp extends StatelessWidget {
