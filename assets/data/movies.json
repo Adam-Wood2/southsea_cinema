@@ -28,7 +28,7 @@
     "ageRating": "15",
     "description": "Ladybug, a professional assassin, is assigned to retrieve a briefcase from a bullet train. Soon, he finds himself battling many other killers who board the same train but with a different objective.",
     "price": 10.0,
-    "date": "Wednesday 21 Oct",
+    "date": "Monday 19 Oct",
     "time": "20:00 - 21:15",
     "imagePath": "assets/images/bullet_train_poster.jpg"
   },
@@ -39,7 +39,7 @@
     "ageRating": "15",
     "description": "None",
     "price": 0.0,
-    "date": "Wednesday 21 Oct",
+    "date": "Monday 19 Oct",
     "time": "20:00 - 21:15",
     "imagePath": "assets/images/nonexistant_poster.jpg"
   }
