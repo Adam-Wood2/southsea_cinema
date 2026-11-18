@@ -1,4 +1,5 @@
 import 'package:path/path.dart';
+import 'package:southsea_cinema/models/booking.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CinemaDatabase {
@@ -68,5 +69,48 @@ class CinemaDatabase {
       "total": 34.00,
       "date": "Thursday 22nd October"
     });
+  }
+
+  Future<int> insertBooking(Booking booking) async {
+    final Database db = await database;
+    final int id = await db.insert("bookings", booking.toMap());
+    return id;
+  }
+
+  Future<List<Booking>> getAllOrders() async {
+    final Database db = await database;
+    final List<Map<String, Object?>> records =
+        await db.query("bookings", orderBy: "bookingNumber DESC");
+    final List<Booking> bookings = [];
+
+    for (final Map<String, Object?> row in records) {
+      bookings.add(Booking.fromMap(row));
+    }
+    return bookings;
+  }
+
+  Future<int> getNextOrderNumber() async {
+    final Database db = await database;
+    final List<Map<String, Object?>> records =
+        await db.rawQuery("SELECT MAX(bookingNumber) as maxNum FROM orders");
+
+    if (records.isEmpty) {
+      return 1;
+    }
+
+    final Object? maxValue = records[0]["maxNum"];
+    if (maxValue == null) {
+      return 1;
+    }
+    final int currentMax = maxValue as int;
+    return currentMax + 1;
+  }
+
+  Future<void> close() async {
+    final Database? cachedDatabase = _database;
+    if (cachedDatabase != null) {
+      await cachedDatabase.close();
+      _database = null;
+    }
   }
 }
