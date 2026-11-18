@@ -92,7 +92,7 @@ class CinemaDatabase {
   Future<int> getNextOrderNumber() async {
     final Database db = await database;
     final List<Map<String, Object?>> records =
-        await db.rawQuery("SELECT MAX(bookingNumber) as maxNum FROM orders");
+        await db.rawQuery("SELECT MAX(bookingNumber) as maxNum FROM bookings");
 
     if (records.isEmpty) {
       return 1;
