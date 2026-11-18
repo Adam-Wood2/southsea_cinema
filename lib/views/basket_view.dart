@@ -30,6 +30,8 @@ class BasketView extends StatefulWidget {
 
 class _BasketViewState extends State<BasketView> {
   String _confirmationMessage = "";
+  String _errorMessage = "";
+  List<Booking> _bookings = [];
 
   String _formatDate(DateTime now) {
     final String day = now.day.toString().padLeft(2, '0');
@@ -39,24 +41,36 @@ class _BasketViewState extends State<BasketView> {
     return '$day/$month/${now.year} $hour:$minute';
   }
 
+  String _buildSummary(List<CartItem> items) {
+    final List<String> parts = [];
+    for (final CartItem item in items) {
+      parts.add("${item.quantity} x ${item.movie.name}");
+    }
+    return parts.join(", ");
+  }
+
   Future<void> _checkout(CartRepository cart, List<CartItem> items) async {
     final double total = cart.totalDue;
     final String date = _formatDate(DateTime.now());
+    final String summary = _buildSummary(items);
 
     try {
       final CinemaDatabase database = CinemaDatabase.instance;
       final int bookingNumber = await database.getNextOrderNumber();
       final Booking record = Booking(
           bookingNumber: bookingNumber,
-          summary: "test",
+          summary: summary,
           total: total,
           date: date);
       await database.insertBooking(record);
+      List<Booking> updatedBookings =
+          await CinemaDatabase.instance.getAllOrders();
       cart.clear();
       if (!mounted) {
         return;
       }
       setState(() {
+        _bookings = updatedBookings;
         _confirmationMessage = "Booking $bookingNumber saved";
       });
     } catch (error) {
@@ -127,6 +141,75 @@ class _BasketViewState extends State<BasketView> {
         ));
   }
 
+  Future<void> _loadBookings() async {
+    try {
+      final List<Booking> bookings =
+          await CinemaDatabase.instance.getAllOrders();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _bookings = bookings;
+      });
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _errorMessage = "Unable to load bookings: $_errorMessage";
+      });
+    }
+  }
+
+  Card _buildBookingCard(Booking booking) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Order #${booking.bookingNumber}"),
+                Text("£${booking.total.toStringAsFixed(2)}")
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(booking.summary),
+            const SizedBox(height: 4),
+            Text(booking.date)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBookingsRows() {
+    final Widget body;
+    if (_errorMessage.isNotEmpty) {
+      body = Center(child: Text(_errorMessage));
+    } else if (_bookings.isEmpty) {
+      body = const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32.0),
+          child: Text("No bookings yet"),
+        ),
+      );
+    } else {
+      body = ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: _bookings.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildBookingCard(_bookings[index]);
+        },
+      );
+    }
+    return body;
+  }
+
   Widget _buildBasketList(CartRepository cart, List<CartItem> items) {
     final List<Widget> children = [];
     children.add(Text("My Order",
@@ -181,10 +264,17 @@ class _BasketViewState extends State<BasketView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _loadBookings();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final CartRepository cart = CartRepository.instance;
     final List<CartItem> items = cart.getItems();
     final Widget content;
+    final Widget body = _buildBookingsRows();
 
     if (items.isEmpty) {
       if (_confirmationMessage.isNotEmpty) {
@@ -207,6 +297,10 @@ class _BasketViewState extends State<BasketView> {
         appBar: AppBar(title: const Text(appTitle)),
         drawer: const NavDrawer(),
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(10.0), child: content));
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            children: [content, body],
+          ),
+        ));
   }
 }
