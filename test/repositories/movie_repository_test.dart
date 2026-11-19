@@ -66,7 +66,7 @@ void main() {
       final MovieRepository repository = MovieRepository();
       final List<Movie> movies = await repository.loadMoviesFromAsset();
 
-      expect(movies.length, 4);
+      expect(movies.length, 3);
       expect(movies[0].id, "everything-everywhere");
       expect(movies[1].id, "dracula");
       expect(repository.getMovies(), movies);
@@ -74,8 +74,6 @@ void main() {
       expect(movies[2].id, "bullet-train");
       expect(movies[2].price, 10.0);
       expect(movies[2].imagePath, "assets/images/bullet_train_poster.jpg");
-      expect(movies[3].id, "nonexistant");
-      expect(movies[3].price, 0.0);
     });
   });
 }

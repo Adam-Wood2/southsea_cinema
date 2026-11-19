@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/repositories/cart_repository.dart';
@@ -7,6 +8,10 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 
 void main() {
+  setUp(() {
+    rootBundle.clear();
+    CartRepository.instance.clear();
+  });
   testWidgets("Displays movie cards with name, prices, dates and ratings",
       (WidgetTester tester) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
@@ -29,11 +34,6 @@ void main() {
 
     await tester.scrollUntilVisible(find.text("Bullet Train"), 150);
     expect(find.text("£10.00"), findsOneWidget);
-    await tester.scrollUntilVisible(find.text("nonexistant"), 150);
-    await tester.pumpAndSettle();
-    expect(find.text("£0.00"), findsOneWidget);
-    expect(find.text("Image unavailable"), findsOneWidget);
-    expect(tester.takeException(), isNull);
   });
 
   testWidgets(

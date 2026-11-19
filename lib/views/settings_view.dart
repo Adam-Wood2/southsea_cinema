@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:southsea_cinema/constants.dart';
-import 'package:southsea_cinema/models/user_settings.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/square_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const String prefAddress = "user_address";
 const String prefEmail = "user_email";
@@ -91,12 +90,6 @@ class _SettingsViewState extends State<SettingsView> {
     await prefs.setString(prefEmail, email);
     await prefs.setString(prefPatronNumber, patronNumber);
     await prefs.setBool(prefNewsletter, _receiveNewsletter);
-
-    final UserSettings settings = UserSettings(
-        address: address,
-        email: email,
-        patronNumber: patronNumber,
-        receiveNewsletter: _receiveNewsletter);
 
     if (!mounted) {
       return;

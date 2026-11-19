@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/database/cinema_db.dart';
 import 'package:southsea_cinema/main.dart';
@@ -34,6 +35,7 @@ const Movie testMovie2 = Movie(
 
 void main() {
   setUp(() async {
+    rootBundle.clear();
     CartRepository.instance.clear();
     sqfliteFfiInit();
     final Database database = await databaseFactoryFfiNoIsolate.openDatabase(

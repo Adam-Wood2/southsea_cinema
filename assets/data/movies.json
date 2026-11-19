@@ -31,16 +31,5 @@
     "date": "Monday 19 Oct",
     "time": "20:00 - 21:15",
     "imagePath": "assets/images/bullet_train_poster.jpg"
-  },
-  {
-    "id": "nonexistant",
-    "name": "nonexistant",
-    "releaseYear": 2000,
-    "ageRating": "15",
-    "description": "None",
-    "price": 0.0,
-    "date": "Monday 19 Oct",
-    "time": "20:00 - 21:15",
-    "imagePath": "assets/images/nonexistant_poster.jpg"
   }
 ]
