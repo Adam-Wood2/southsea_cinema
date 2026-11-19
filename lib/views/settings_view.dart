@@ -160,6 +160,7 @@ class _SettingsViewState extends State<SettingsView> {
                 children: [
                   const Text("Recieve news by email"),
                   Switch(
+                      key: const Key("newsletter-switch"),
                       value: _receiveNewsletter,
                       onChanged: (bool value) {
                         setState(() {
