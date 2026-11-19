@@ -78,7 +78,7 @@ class _BasketViewState extends State<BasketView> {
         return;
       }
       setState(() {
-        _confirmationMessage = "Could not save your order: $error";
+        _errorMessage = "Could not save your booking: $error";
       });
     }
   }
