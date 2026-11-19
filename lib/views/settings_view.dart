@@ -8,9 +8,12 @@ const String prefAddress = "user_address";
 const String prefEmail = "user_email";
 const String prefPatronNumber = "user_patron_number";
 const String prefNewsletter = "user_newsletter";
+const String prefDarkMode = "user_dark_mode";
 
 class SettingsView extends StatefulWidget {
-  const SettingsView({super.key});
+  final ValueChanged<ThemeMode>? onThemeModeSaved;
+
+  const SettingsView({super.key, this.onThemeModeSaved});
 
   @override
   State<SettingsView> createState() {
@@ -23,6 +26,7 @@ class _SettingsViewState extends State<SettingsView> {
   late TextEditingController _emailController;
   late TextEditingController _patronNumberController;
   bool _receiveNewsletter = false;
+  bool _useDarkMode = true;
   String _confirmationMessage = "";
 
   Future<void> _loadSettings() async {
@@ -31,6 +35,7 @@ class _SettingsViewState extends State<SettingsView> {
     final String? savedEmail = await prefs.getString(prefEmail);
     final String? savedPatronNumber = await prefs.getString(prefPatronNumber);
     final bool? savedNewsletter = await prefs.getBool(prefNewsletter);
+    final bool? savedDarkMode = await prefs.getBool(prefDarkMode);
 
     String address = "";
     if (savedAddress != null) {
@@ -52,6 +57,11 @@ class _SettingsViewState extends State<SettingsView> {
       newsletter = savedNewsletter;
     }
 
+    bool darkMode = true;
+    if (savedDarkMode != null) {
+      darkMode = savedDarkMode;
+    }
+
     if (!mounted) {
       return;
     }
@@ -60,6 +70,7 @@ class _SettingsViewState extends State<SettingsView> {
       _emailController.text = email;
       _patronNumberController.text = patronNumber;
       _receiveNewsletter = newsletter;
+      _useDarkMode = darkMode;
     });
   }
 
@@ -90,6 +101,9 @@ class _SettingsViewState extends State<SettingsView> {
     await prefs.setString(prefEmail, email);
     await prefs.setString(prefPatronNumber, patronNumber);
     await prefs.setBool(prefNewsletter, _receiveNewsletter);
+    await prefs.setBool(prefDarkMode, _useDarkMode);
+    widget.onThemeModeSaved
+        ?.call(_useDarkMode ? ThemeMode.dark : ThemeMode.light);
 
     if (!mounted) {
       return;
@@ -165,6 +179,20 @@ class _SettingsViewState extends State<SettingsView> {
                       onChanged: (bool value) {
                         setState(() {
                           _receiveNewsletter = value;
+                        });
+                      })
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Dark mode"),
+                  Switch(
+                      key: const Key("theme-mode-switch"),
+                      value: _useDarkMode,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _useDarkMode = value;
                         });
                       })
                 ],

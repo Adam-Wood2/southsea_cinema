@@ -115,11 +115,13 @@ class _BasketViewState extends State<BasketView> {
   }
 
   Widget _buildTotalRow(String label, String value, {bool emphasise = false}) {
+    final Color textColor = Theme.of(context).colorScheme.onSurface;
     final TextStyle style;
     if (emphasise) {
-      style = const TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
+      style = TextStyle(
+          color: textColor, fontWeight: FontWeight.bold, fontSize: 16);
     } else {
-      style = listingDescriptionStyle;
+      style = listingDescriptionStyle.copyWith(color: textColor);
     }
 
     return Padding(
@@ -151,8 +153,10 @@ class _BasketViewState extends State<BasketView> {
   }
 
   Card _buildBookingCard(Booking booking) {
+    final Color surfaceColor = Theme.of(context).colorScheme.surface;
+
     return Card(
-      color: cinemaSurface,
+      color: surfaceColor,
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),

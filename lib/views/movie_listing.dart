@@ -24,17 +24,27 @@ class _MovieListingState extends State<MovieListing> {
   double _totalPrice = 0.0;
   bool _itemInCart = false;
 
-  final List<DropdownMenuEntry<int>> ticketAmountEntries = [
-    DropdownMenuEntry(value: 0, label: "0", style: dropdownButtonStyle),
-    DropdownMenuEntry(value: 1, label: "1", style: dropdownButtonStyle),
-    DropdownMenuEntry(value: 2, label: "2", style: dropdownButtonStyle),
-    DropdownMenuEntry(value: 3, label: "3", style: dropdownButtonStyle),
-    DropdownMenuEntry(value: 4, label: "4", style: dropdownButtonStyle),
-    DropdownMenuEntry(value: 5, label: "5", style: dropdownButtonStyle),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Theme.of(context).colorScheme.onSurface;
+    final Color surfaceColor = Theme.of(context).colorScheme.surface;
+    final ButtonStyle dropdownEntryStyle = ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll<Color>(surfaceColor),
+      foregroundColor: WidgetStatePropertyAll<Color>(textColor),
+    );
+    final List<DropdownMenuEntry<int>> ticketAmountEntries = [
+      DropdownMenuEntry(value: 0, label: "0", style: dropdownEntryStyle),
+      DropdownMenuEntry(value: 1, label: "1", style: dropdownEntryStyle),
+      DropdownMenuEntry(value: 2, label: "2", style: dropdownEntryStyle),
+      DropdownMenuEntry(value: 3, label: "3", style: dropdownEntryStyle),
+      DropdownMenuEntry(value: 4, label: "4", style: dropdownEntryStyle),
+      DropdownMenuEntry(value: 5, label: "5", style: dropdownEntryStyle),
+    ];
+    final MenuStyle dropdownMenuStyle = MenuStyle(
+      backgroundColor: WidgetStatePropertyAll<Color>(surfaceColor),
+    );
+    final TextStyle dropdownTextStyle = TextStyle(color: textColor);
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Book ${widget.movie.name}"),
@@ -49,7 +59,7 @@ class _MovieListingState extends State<MovieListing> {
                 children: [
                   Text(
                     "${widget.movie.name} (${widget.movie.releaseYear}) (${widget.movie.ageRating})",
-                    style: listingTitleStyle,
+                    style: listingTitleStyle.copyWith(color: textColor),
                   ),
                   SizedBox(
                     height: 5,
@@ -65,31 +75,32 @@ class _MovieListingState extends State<MovieListing> {
                   ),
                   Text(
                     "Southsea Cinema Room",
-                    style: listingDescriptionStyle,
+                    style: listingDescriptionStyle.copyWith(color: textColor),
                   ),
                   Text("${widget.movie.date} -- ${widget.movie.time}",
-                      style: listingDescriptionStyle),
+                      style:
+                          listingDescriptionStyle.copyWith(color: textColor)),
                   SizedBox(
                     height: 5,
                   ),
                   Text(
                     "Summary:",
-                    style: listingDescriptionStyle,
+                    style: listingDescriptionStyle.copyWith(color: textColor),
                   ),
                   Text(
                     widget.movie.description,
-                    style: listingDescriptionStyle,
+                    style: listingDescriptionStyle.copyWith(color: textColor),
                   ),
                   SizedBox(
                     height: 5,
                   ),
                   Text(
                     "Please note that Discount / Membership Benefits will be applied once you have selected your tickets.",
-                    style: listingDescriptionStyle,
+                    style: listingDescriptionStyle.copyWith(color: textColor),
                   ),
                   Text(
                     "Select Quantities (Up to 5 in total)",
-                    style: listingDescriptionStyle,
+                    style: listingDescriptionStyle.copyWith(color: textColor),
                   ),
                   Text("Price per ticket: ${widget.movie.formattedPrice}"),
                   LayoutBuilder(builder: (context, constraints) {

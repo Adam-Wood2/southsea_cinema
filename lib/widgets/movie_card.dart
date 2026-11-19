@@ -11,8 +11,11 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Theme.of(context).colorScheme.onSurface;
+    final Color surfaceColor = Theme.of(context).colorScheme.surface;
+
     return Card(
-        color: cinemaSurface,
+        color: surfaceColor,
         margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -25,13 +28,14 @@ class MovieCard extends StatelessWidget {
                   Expanded(
                       child: Text(
                     movie.name,
-                    style: listingTitleStyle,
+                    style: listingTitleStyle.copyWith(color: textColor),
                   )),
                   Text(
                     "(${movie.releaseYear}) ",
-                    style: listingInfoStyle,
+                    style: listingInfoStyle.copyWith(color: textColor),
                   ),
-                  Text("(${movie.ageRating}) ", style: listingInfoStyle),
+                  Text("(${movie.ageRating}) ",
+                      style: listingInfoStyle.copyWith(color: textColor)),
                 ],
               ),
               LayoutBuilder(
@@ -60,7 +64,8 @@ class MovieCard extends StatelessWidget {
                       Expanded(
                           child: Text(
                         movie.description,
-                        style: listingDescriptionStyle,
+                        style:
+                            listingDescriptionStyle.copyWith(color: textColor),
                       )),
                     ],
                   );
@@ -71,7 +76,7 @@ class MovieCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("${movie.date} \n${movie.time}",
-                      style: listingInfoStyle),
+                      style: listingInfoStyle.copyWith(color: textColor)),
                   SquareButton(
                       onPressed: () {
                         Navigator.push(context,
@@ -90,7 +95,7 @@ class MovieCard extends StatelessWidget {
                     child: Text(
                       movie.formattedPrice,
                       textAlign: TextAlign.right,
-                      style: listingInfoStyle,
+                      style: listingInfoStyle.copyWith(color: textColor),
                     ),
                   ))
             ],

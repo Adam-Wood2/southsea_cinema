@@ -6,8 +6,12 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final Color surfaceColor = theme.colorScheme.surface;
+    final Color textColor = theme.colorScheme.onSurface;
+
     return Drawer(
-      backgroundColor: cinemaBackground,
+      backgroundColor: surfaceColor,
       child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -15,14 +19,14 @@ class NavDrawer extends StatelessWidget {
             Container(
               height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              color: cinemaSurface,
+              color: surfaceColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       appTitle,
-                      style: cinemaHeaderStyle,
+                      style: cinemaHeaderStyle.copyWith(color: textColor),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -53,8 +57,10 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Theme.of(context).colorScheme.onSurface;
+
     return ListTile(
-      title: Text(title, style: const TextStyle(color: cinemaFontWhite)),
+      title: Text(title, style: TextStyle(color: textColor)),
       onTap: () {
         ModalRoute<dynamic>? modalRoute = ModalRoute.of(context);
         String currentRoute = "";
