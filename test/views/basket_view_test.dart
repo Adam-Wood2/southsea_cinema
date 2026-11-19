@@ -140,6 +140,26 @@ void main() {
       expect(find.text("My Order"), findsOneWidget);
       expect(find.text("1 ticket"), findsOneWidget);
     });
+
+    testWidgets("deleting middle basket line keeps other two",
+        (WidgetTester tester) async {
+      CartRepository.instance.addItem(CartItem(movie: testMovie, quantity: 1));
+      CartRepository.instance.addItem(CartItem(movie: testMovie, quantity: 2));
+      CartRepository.instance.addItem(CartItem(movie: testMovie2, quantity: 3));
+
+      await tester.pumpWidget(MaterialApp(home: BasketView()));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(Key("1")), findsOneWidget);
+      await tester.tap(find.byKey(Key("1")));
+
+      final List<CartItem> items = CartRepository.instance.getItems();
+      expect(items.length, 2);
+      expect(items[0].movie.name, "name");
+      expect(items[0].quantity, 1);
+      expect(items[1].movie.name, "name2");
+      expect(items[1].quantity, 3);
+    });
   });
 
   group("Basket checkout tests", () {
@@ -147,7 +167,7 @@ void main() {
         "Checkout saves the order, clears the basket, and displays the booking card",
         (WidgetTester tester) async {
       CartRepository.instance
-          .addItem(const CartItem(movie: movie, quantity: 2));
+          .addItem(const CartItem(movie: testMovie, quantity: 2));
       await tester.pumpWidget(MaterialApp(home: BasketView()));
 
       await tester.runAsync(() async {
@@ -164,7 +184,7 @@ void main() {
       if (bookings != null) {
         expect(bookings.length, 1);
         expect(bookings[0].bookingNumber, 1);
-        expect(bookings[0].summary, "2 x Movie1");
+        expect(bookings[0].summary, "2 x name");
         expect(bookings[0].total, 24.0);
       }
       expect(CartRepository.instance.getItems(), isEmpty);
@@ -174,7 +194,7 @@ void main() {
     testWidgets("Checkout keeps the basket when saving failts",
         (WidgetTester tester) async {
       CartRepository.instance
-          .addItem(const CartItem(movie: movie, quantity: 2));
+          .addItem(const CartItem(movie: testMovie, quantity: 2));
 
       await tester.runAsync(() async {
         final Database database = await CinemaDatabase.instance.database;

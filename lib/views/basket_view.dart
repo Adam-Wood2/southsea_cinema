@@ -8,17 +8,6 @@ import 'package:southsea_cinema/repositories/cart_repository.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/square_button.dart';
 
-const Movie movie = Movie(
-    id: "movie1",
-    name: "Movie1",
-    releaseYear: 2000,
-    ageRating: "PG",
-    description: "description",
-    price: 10.0,
-    date: "date",
-    time: "time",
-    imagePath: "imagePath");
-
 class BasketView extends StatefulWidget {
   const BasketView({super.key});
 
@@ -115,7 +104,7 @@ class _BasketViewState extends State<BasketView> {
                     "${itemMovie.name}, ${itemMovie.date}, ${itemMovie.time}",
                     textAlign: TextAlign.left)),
             IconButton(
-                icon: Icon(Icons.delete_outline),
+                icon: Icon(Icons.delete_outline, key: Key(index.toString())),
                 onPressed: () {
                   setState(() {
                     cart.removeItem(index);
