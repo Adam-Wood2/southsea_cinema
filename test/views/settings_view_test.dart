@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:southsea_cinema/views/settings_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
+import 'package:southsea_cinema/main.dart';
+import 'package:southsea_cinema/views/settings_view.dart';
 
 void main() {
   setUp(() {
@@ -80,6 +81,52 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: SettingsView()));
       await tester.pumpAndSettle();
 
+      expect(find.text("test address"), findsOneWidget);
+      expect(find.text("test@email.com"), findsOneWidget);
+      expect(find.text("1234"), findsOneWidget);
+      final Switch switchWidget = tester.widget<Switch>(find.byType(Switch));
+      expect(switchWidget.value, isTrue);
+    });
+  });
+
+  group("Settings persistance tests", () {
+    testWidgets("SettingsView text fields are blank by default",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip("Open navigation menu"));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text("My Settings").first);
+      await tester.pumpAndSettle();
+
+      expect(find.text("Enter your current home address"), findsOneWidget);
+      expect(find.text("Enter your email address"), findsOneWidget);
+      expect(find.text("Enter your patron number"), findsOneWidget);
+      final Switch switchWidget = tester.widget<Switch>(find.byType(Switch));
+      expect(switchWidget.value, isFalse);
+    });
+
+    testWidgets(
+        "SettingsView loads pre-filled values when navigated to from HomeView",
+        (WidgetTester tester) async {
+      SharedPreferencesAsyncPlatform.instance =
+          InMemorySharedPreferencesAsync.withData(<String, Object>{
+        prefAddress: "test address",
+        prefEmail: "test@email.com",
+        prefPatronNumber: "1234",
+        prefNewsletter: true
+      });
+
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip("Open navigation menu"));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text("My Settings").first);
+      await tester.pumpAndSettle();
       expect(find.text("test address"), findsOneWidget);
       expect(find.text("test@email.com"), findsOneWidget);
       expect(find.text("1234"), findsOneWidget);

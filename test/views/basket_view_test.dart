@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/database/cinema_db.dart';
+import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/models/booking.dart';
 import 'package:southsea_cinema/models/cart_item.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -106,6 +107,36 @@ void main() {
       expect(find.textContaining("Bullet Train"), findsOneWidget);
       expect(find.text("£30.00").last, findsOneWidget);
       expect(find.text("£34.00"), findsOneWidget);
+    });
+
+    testWidgets("Booking tickets adds them to the booking screen",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+      //Presses book now on EEAAO movie listing and loads the listing view, selects one ticket and adds to basket
+      await tester.tap(find.text("Book Now").first);
+      await tester.pumpAndSettle();
+
+      await tester.scrollUntilVisible(find.byType(DropdownMenu<int>), 100,
+          scrollable: find.byType(Scrollable).first);
+
+      await tester.tap(find.byType(DropdownMenu<int>));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text("1").last);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text("Add to order"));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip("Open navigation menu"));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text("My Basket").first);
+      await tester.pumpAndSettle();
+
+      expect(find.text("My Order"), findsOneWidget);
+      expect(find.text("1 ticket"), findsOneWidget);
     });
   });
 
