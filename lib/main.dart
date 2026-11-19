@@ -2,10 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/views/basket_view.dart';
 import 'package:southsea_cinema/views/home_view.dart';
-
-import 'views/basket_view.dart';
-import 'views/settings_view.dart';
+import 'package:southsea_cinema/views/settings_view.dart';
 
 bool isSupportPlatform() {
   if (kIsWeb) {
@@ -84,16 +83,16 @@ class _SouthseaCinemaAppState extends State<SouthseaCinemaApp> {
       debugShowCheckedModeBanner: false,
       themeMode: _themeMode,
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: cinemaLightBackground,
         textTheme: ThemeData.light().textTheme.apply(
-              bodyColor: Colors.black87,
-              displayColor: Colors.black87,
+              bodyColor: cinemaFontBlack,
+              displayColor: cinemaFontBlack,
             ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: cinemaLightBackground,
           iconTheme: IconThemeData(color: cinemaBrand),
           titleTextStyle: TextStyle(
-            color: Colors.black87,
+            color: cinemaFontBlack,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -103,7 +102,7 @@ class _SouthseaCinemaAppState extends State<SouthseaCinemaApp> {
           seedColor: cinemaBrand,
           brightness: Brightness.light,
           primary: cinemaBrand,
-          surface: Colors.white,
+          surface: cinemaLightBackground,
         ),
       ),
       darkTheme: ThemeData.dark().copyWith(

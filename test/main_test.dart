@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
+import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/views/home_view.dart';
 
@@ -67,10 +68,12 @@ void main() {
     );
 
     expect(darkApp.darkTheme?.colorScheme.brightness, Brightness.dark);
-    expect(darkApp.darkTheme?.colorScheme.onSurface, isNot(Colors.black));
+    expect(darkApp.darkTheme?.scaffoldBackgroundColor, cinemaBackground);
+    expect(
+        darkApp.darkTheme?.appBarTheme.titleTextStyle?.color, cinemaFontWhite);
     expect(lightApp.theme?.colorScheme.brightness, Brightness.light);
-    expect(lightApp.theme?.colorScheme.onSurface, isNot(Colors.white));
-    expect(lightApp.theme?.appBarTheme.titleTextStyle?.color, Colors.black87);
+    expect(lightApp.theme?.scaffoldBackgroundColor, cinemaLightBackground);
+    expect(lightApp.theme?.appBarTheme.titleTextStyle?.color, cinemaFontBlack);
   });
 
   testWidgets("saving the settings switch updates the root app theme",
