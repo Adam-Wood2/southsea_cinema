@@ -1,9 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart';
 import 'package:southsea_cinema/database/cinema_db.dart';
 import 'package:southsea_cinema/models/booking.dart';
 import 'package:southsea_cinema/models/booking_item.dart';
-import 'dart:io';
-import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_common_ffi.dart';
 
 void main() {
@@ -47,6 +48,7 @@ void main() {
 
   test("getNextBookingNumber increments the current number", () async {
     expect(await CinemaDatabase.instance.getNextOrderNumber(), 1);
+    await CinemaDatabase.instance.insertBooking(buildRecord(1, "Order", 1.0));
 
     await CinemaDatabase.instance.insertBooking(buildRecord(5, "Order", 1.0));
 
@@ -116,8 +118,7 @@ void main() {
 
     final int bookingId = await CinemaDatabase.instance
         .insertBookingWithItems(booking, <BookingItem>[]);
-    final List<Booking> bookings =
-        await CinemaDatabase.instance.getAllOrders();
+    final List<Booking> bookings = await CinemaDatabase.instance.getAllOrders();
 
     expect(bookingId, greaterThan(0));
     expect(bookings.length, 1);
