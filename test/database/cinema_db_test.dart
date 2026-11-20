@@ -106,6 +106,26 @@ void main() {
     expect(items[0].quantity, 2);
   });
 
+  test("An order can be stored without booking items", () async {
+    const Booking booking = Booking(
+      bookingNumber: 13,
+      summary: "No tickets",
+      total: 0.0,
+      date: "20/11/2026 12:00",
+    );
+
+    final int bookingId = await CinemaDatabase.instance
+        .insertBookingWithItems(booking, <BookingItem>[]);
+    final List<Booking> bookings =
+        await CinemaDatabase.instance.getAllOrders();
+
+    expect(bookingId, greaterThan(0));
+    expect(bookings.length, 1);
+    expect(bookings[0].id, bookingId);
+    expect(bookings[0].summary, "No tickets");
+    expect(bookings[0].items, isEmpty);
+  });
+
   test("Foreign key rejects an item for a missing booking", () async {
     final Database database = await CinemaDatabase.instance.database;
 
