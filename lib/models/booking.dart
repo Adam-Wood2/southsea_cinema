@@ -1,16 +1,20 @@
+import 'booking_item.dart';
+
 class Booking {
   final int? id;
   final int bookingNumber;
   final String summary;
   final double total;
   final String date;
+  final List<BookingItem> items;
 
   const Booking(
       {this.id,
       required this.bookingNumber,
       required this.summary,
       required this.total,
-      required this.date});
+      required this.date,
+      this.items = const <BookingItem>[]});
 
   factory Booking.fromMap(Map<String, Object?> map) {
     final int bookingNumber = map["bookingNumber"] as int;
@@ -24,7 +28,8 @@ class Booking {
         bookingNumber: bookingNumber,
         summary: summary,
         total: total,
-        date: date);
+        date: date,
+        items: const <BookingItem>[]);
   }
 
   Map<String, Object?> toMap() {

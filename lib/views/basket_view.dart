@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/database/cinema_db.dart';
 import 'package:southsea_cinema/models/booking.dart';
+import 'package:southsea_cinema/models/booking_item.dart';
 import 'package:southsea_cinema/models/cart_item.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/cart_repository.dart';
@@ -51,10 +52,20 @@ class _BasketViewState extends State<BasketView> {
           summary: summary,
           total: total,
           date: date);
-      await database.insertBooking(record);
+      final List<BookingItem> bookingItems = <BookingItem>[];
+      for (final CartItem item in items) {
+        bookingItems.add(BookingItem(
+          bookingId: 0,
+          movieId: item.movie.id,
+          movieName: item.movie.name,
+          unitPrice: item.movie.price,
+          quantity: item.quantity,
+        ));
+      }
+      await database.insertBookingWithItems(record, bookingItems);
+      cart.clear();
       List<Booking> updatedBookings =
           await CinemaDatabase.instance.getAllOrders();
-      cart.clear();
       if (!mounted) {
         return;
       }
@@ -147,13 +158,23 @@ class _BasketViewState extends State<BasketView> {
         return;
       }
       setState(() {
-        _errorMessage = "Unable to load bookings: $_errorMessage";
+        _errorMessage = "Unable to load bookings: $error";
       });
     }
   }
 
   Card _buildBookingCard(Booking booking) {
     final Color surfaceColor = Theme.of(context).colorScheme.surface;
+    final List<Widget> detailWidgets = <Widget>[];
+
+    if (booking.items.isEmpty) {
+      detailWidgets.add(Text(booking.summary));
+    } else {
+      for (final BookingItem item in booking.items) {
+        detailWidgets.add(Text(
+            "${item.quantity} x ${item.movieName} - £${item.unitPrice.toStringAsFixed(2)}"));
+      }
+    }
 
     return Card(
       color: surfaceColor,
@@ -171,7 +192,7 @@ class _BasketViewState extends State<BasketView> {
               ],
             ),
             const SizedBox(height: 4),
-            Text(booking.summary),
+            ...detailWidgets,
             const SizedBox(height: 4),
             Text(booking.date)
           ],

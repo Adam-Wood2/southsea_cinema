@@ -8,6 +8,9 @@ Southsea Cinema is a Flutter app for viewing films and adding tickets to an orde
 - Open a film to see its poster, description, age rating, date and time.
 - View basket totals, remove items and complete checkout.
 - Save and view bookings using a local SQLite database.
+- Store each purchased movie ticket line as a linked booking item for new orders.
+- Keep existing order summaries visible for backwards compatibility with older records.
+- Use a database migration to add `booking_items` without removing existing bookings.
 - Save customer profile settings and choose light or dark mode.
 
 ## Screenshots
