@@ -3,7 +3,7 @@ import 'package:southsea_cinema/database/cinema_db.dart';
 import 'package:southsea_cinema/models/booking.dart';
 import 'package:southsea_cinema/models/booking_item.dart';
 import 'dart:io';
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_common_ffi.dart';
 
 void main() {
@@ -204,7 +204,7 @@ void main() {
   test("File migration preserves existing v1 orders", () async {
     final Directory directory =
         await Directory.systemTemp.createTemp("southsea_migration");
-    final String filePath = path.join(directory.path, "cinema_v1.db");
+    final String filePath = join(directory.path, "cinema_v1.db");
     final Database oldDatabase = await databaseFactoryFfiNoIsolate.openDatabase(
       filePath,
       options: OpenDatabaseOptions(
