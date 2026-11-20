@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
-import 'package:southsea_cinema/widgets/nav_drawer.dart';
-import 'package:southsea_cinema/models/movie.dart';
-import 'package:southsea_cinema/widgets/square_button.dart';
-import 'package:southsea_cinema/repositories/cart_repository.dart';
 import 'package:southsea_cinema/models/cart_item.dart';
+import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/cart_repository.dart';
+import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/widgets/square_button.dart';
 
 class MovieListing extends StatefulWidget {
   final Movie movie;
@@ -162,7 +162,13 @@ class _MovieListingState extends State<MovieListing> {
                   _itemInCart
                       ? Text(
                           "$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})")
-                      : Text("")
+                      : Text(""),
+                 Row(children: [
+                    Expanded(
+                      child: Text(
+                          "Current Order subtotal for ${widget.movie.name}: £${cart.subtotal.toStringAsFixed(2)}"),
+                    )
+                  ]) 
                 ]),
           ),
         ));
