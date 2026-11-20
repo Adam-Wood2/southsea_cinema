@@ -71,7 +71,7 @@ Run the app:
 flutter run -d [device-name]
 ```
 
-Replace `[device-name]` with the device ID shown by `flutter devices`, if it is different.
+Replace `[device-name]` with the device ID shown by `flutter devices`.
 
 The app shows an unsupported-platform message outside Android, including on the web.
 
