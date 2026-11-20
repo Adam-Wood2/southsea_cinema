@@ -186,6 +186,26 @@ void main() {
     expect(title.style?.color, lightTheme.colorScheme.onSurface);
   });
 
+  testWidgets("movie card displays an error when its image does not load",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(body: MovieCard(movie: themeTestMovie)),
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.text("Image unavailable"), findsOneWidget);
+  });
+
+  testWidgets("movie listing displays an error when its image does not load",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: MovieListing(movie: themeTestMovie),
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.text("Image Unavailable"), findsOneWidget);
+  });
+
   testWidgets("drawer uses the active surface and text colors",
       (WidgetTester tester) async {
     final ThemeData lightTheme = await loadTheme(tester, ThemeMode.light);
