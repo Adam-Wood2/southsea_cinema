@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,10 @@ void main() {
     SharedPreferencesAsyncPlatform.instance =
         InMemorySharedPreferencesAsync.empty();
     rootBundle.clear();
+  });
+
+  tearDown(() {
+    debugDefaultTargetPlatformOverride = null;
   });
 
   testWidgets("App displays HomeView as home", (WidgetTester tester) async {
@@ -93,5 +98,28 @@ void main() {
       tester.widget<MaterialApp>(find.byType(MaterialApp)).themeMode,
       ThemeMode.light,
     );
+  });
+
+  test("Android is supported", () {
+    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    expect(isSupportPlatform(), isTrue);
+  });
+
+  test("Other platforms are not supported", () {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    expect(isSupportPlatform(), isFalse);
+    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    expect(isSupportPlatform(), isFalse);
+    debugDefaultTargetPlatformOverride = TargetPlatform.windows;
+    expect(isSupportPlatform(), isFalse);
+    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
+    expect(isSupportPlatform(), isFalse);
+  });
+
+
+  testWidgets("The unsupport platform screen explains what to do",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const UnsupportedPlatformApp());
+    expect(find.textContaining("Android devices"), findsOneWidget);
   });
 }

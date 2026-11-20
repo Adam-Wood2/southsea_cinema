@@ -163,12 +163,12 @@ class _MovieListingState extends State<MovieListing> {
                       ? Text(
                           "$_cartQuantity tickets added to basket (£${_totalPrice.toStringAsFixed(2)})")
                       : Text(""),
-                 Row(children: [
+                  Row(children: [
                     Expanded(
                       child: Text(
-                          "Current Order subtotal for ${widget.movie.name}: £${cart.subtotal.toStringAsFixed(2)}"),
+                          "Current Order subtotal: £${cart.subtotal.toStringAsFixed(2)}"),
                     )
-                  ]) 
+                  ])
                 ]),
           ),
         ));
